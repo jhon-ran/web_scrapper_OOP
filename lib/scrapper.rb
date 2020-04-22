@@ -64,7 +64,12 @@ class Scrapper
 			csv << [key, value]
 		end
 		end
-	end
+  end
+  
+  # saves the hash as spreadsheet
+  def save_as_spreadsheet
+
+  end
 
   # Executes each method
   def perform
