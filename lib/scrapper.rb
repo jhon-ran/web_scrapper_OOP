@@ -56,6 +56,15 @@ class Scrapper
       end	
   end
 
+  # Saves the hash as a csv file
+  def save_as_csv
+		CSV.open("db/emails.csv", "w") do |csv|
+			csv << ["City", "Email"]
+			@my_hash.each_pair  do |key, value|
+			csv << [key, value]
+		end
+		end
+	end
 
   # Executes each method
   def perform
@@ -63,6 +72,7 @@ class Scrapper
     get_email
     make_hash
     save_as_JSON
+    save_as_csv
   end
   
 end
