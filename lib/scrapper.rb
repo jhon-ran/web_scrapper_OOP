@@ -2,7 +2,7 @@ require 'pry'
 require 'rubygems'
 require 'nokogiri'
 require 'open-uri'
-
+Dotenv.load('.env')
 
 
 class Scrapper
@@ -68,6 +68,20 @@ class Scrapper
   
   # saves the hash as spreadsheet
   def save_as_spreadsheet
+    session = GoogleDrive::Session.from_config("lib/config.json")
+
+    ws = session.spreadsheet_by_key("1hZxB3t8J4kvsIxQs3HXJOsM-TnvKjRKSqqAEMJCdyC4").worksheets[0]
+
+    i = 2
+		ws[1,1]= "City"
+		ws[1,2] = "Email"
+		@my_hash.each_pair  do |key, value|
+			ws[i,1] = key
+			ws[i,2] = value
+			i += 1
+		end
+		ws.save 
+		ws.reload
 
   end
 
@@ -78,6 +92,7 @@ class Scrapper
     make_hash
     save_as_JSON
     save_as_csv
+    save_as_spreadsheet
   end
   
 end
