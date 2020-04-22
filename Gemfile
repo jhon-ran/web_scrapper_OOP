@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'csv'
 gem 'dotenv'
 gem 'nokogiri'
 ruby '2.5.1'
